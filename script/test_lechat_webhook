@@ -1,0 +1,5 @@
+#!/bin/bash
+cd -- "${0%/*}"
+cd ..
+
+bundle exec ruby -r ./config/load.rb -r ./lib/services/http_post.rb -r ./lib/services/lechat_webhook.rb -e "Service::LeChatWebhook.new(:push, {'webhook_url' => 'http://api.dev.lechat.im/rooms/1e748c00-16f5-11bf-a8a4-c860003dc8f3/github'}).receive_event"

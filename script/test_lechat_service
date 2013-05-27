@@ -1,0 +1,9 @@
+#!/bin/bash
+cd -- "${0%/*}"
+cd ..
+
+EVENT="push"
+# can be push, pull_request
+[ -n $1 ] && EVENT="$1"
+
+bundle exec ruby -r ./config/load.rb -r ./lib/services/http_post.rb -r ./lib/services/kato.rb -e "Service::Kato.new(:$EVENT, {'webhook_url' => 'http://api.lechat.punklan.net/rooms/c1d63fe6fbdfa3a21df24598a7d1f72a10e08e95f8fb59c4e2cee519b7c19c5/github'}).receive_event"
